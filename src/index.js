@@ -10,10 +10,11 @@ import thunk from 'redux-thunk'
 
 import reducer from './node_modules/reducers'
 import App from './node_modules/App'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 
 
-const browserHistory = createBrowserHistory({ basename: '/react/crypto_example' })
+// const browserHistory = createBrowserHistory({ basename: '/react/crypto_example' })
+const browserHistory = createBrowserHistory()
 
 const middleware = applyMiddleware(thunk, routerMiddleware(browserHistory))
 const store = createStore(reducer, composeWithDevTools(middleware))
@@ -22,12 +23,14 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 
 const Root = (
-  <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>
+  <div>
+    <Provider store={store}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>
+  </div>
 )
 
 ReactDOM.render(Root, document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
