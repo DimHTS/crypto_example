@@ -2,7 +2,7 @@ import {
   GET__TRADE_HISTORY__LOADING,
   GET__TRADE_HISTORY__SUCCESS,
   GET__TRADE_HISTORY__ERROR
-} from 'actions/tradeHistory'
+} from '../actions/tradeHistory'
 
 
 const initialState = {

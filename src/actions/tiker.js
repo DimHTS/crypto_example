@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import findCurrenciesAndCoins from 'helpers/actions/findCurrenciesAndCoins'
+import findCurrenciesAndCoins from '../helpers/actions/findCurrenciesAndCoins'
 
 
 export const GET__TIKER__LOADING = 'GET__TIKER__LOADING'

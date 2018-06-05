@@ -8,11 +8,11 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 import thunk from 'redux-thunk'
 
-import reducer from './node_modules/reducers'
-import App from './node_modules/App'
-// import registerServiceWorker from './registerServiceWorker'
+import reducer from './reducers'
+import App from './App'
 
-import './node_modules/config'
+import './config'
+// import registerServiceWorker from './registerServiceWorker'
 
 // const browserHistory = createBrowserHistory({ basename: '/react/crypto_example' })
 const browserHistory = createBrowserHistory()

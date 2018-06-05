@@ -3,7 +3,7 @@
 */
 import React, { Fragment } from 'react'
 
-import Spinner from 'componentsUI/Spinner'
+import Spinner from '../Spinner'
 
 const Loading = () => {
   return <Fragment>

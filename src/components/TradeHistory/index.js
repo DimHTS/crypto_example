@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 //Components
-import Button from 'componentsUI/Button'
+import Button from '../../componentsUI/Button'
 
 // import './index.css';
 

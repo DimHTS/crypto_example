@@ -7,8 +7,8 @@ import './App.css';
 
 // Containers
 // import Home from './Home';
-import TradeHistory from 'containers/TradeHistory';
-import NotFound from 'containers/NotFound';
+import TradeHistory from './containers/TradeHistory';
+import NotFound from './containers/NotFound';
 
 class App extends Component {
   render() {

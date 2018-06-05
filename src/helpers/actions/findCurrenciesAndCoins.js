@@ -1,3 +1,4 @@
+
 export default function findCurrenciesAndCoins(tikers) {
   let currencies = [];
   let dataCurrencies = [];

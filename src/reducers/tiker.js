@@ -2,7 +2,7 @@ import {
   GET__TIKER__LOADING,
   GET__TIKER__SUCCESS,
   GET__TIKER__ERROR
-} from 'actions/tiker'
+} from '../actions/tiker'
 
 
 const initialState = {

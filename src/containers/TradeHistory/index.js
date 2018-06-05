@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 
 
 import './index.css';
-import { onGetTiker } from 'actions/tiker'
-import { onGetTradeHistory } from 'actions/tradeHistory'
+import { onGetTiker } from '../../actions/tiker'
+import { onGetTradeHistory } from '../../actions/tradeHistory'
 //Components
-import TikerSelection from 'components/TikerSelection'
-import TradeHistoryComponent from 'components/TradeHistory'
-import Loading from 'componentsUI/Loading'
-import Error from 'componentsUI/Error'
+import TikerSelection from '../../components/TikerSelection'
+import TradeHistoryComponent from '../../components/TradeHistory'
+import Loading from '../../componentsUI/Loading'
+import Error from '../../componentsUI/Error'
 
 class TradeHistory extends Component {
   constructor() {

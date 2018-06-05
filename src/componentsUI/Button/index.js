@@ -8,7 +8,7 @@
 */
 import React, { Component } from 'react'
 
-import Spinner from 'componentsUI/Spinner'
+import Spinner from '../Spinner'
 
 
 class Button extends Component {

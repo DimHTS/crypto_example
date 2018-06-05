@@ -3,7 +3,7 @@
 */
 import React, { Fragment } from 'react'
 
-import { errors } from 'constants/errors'
+import { errors } from '../../constants/errors'
 
 const Error = ({ onClick }) => {
   return <Fragment>
