@@ -12,6 +12,7 @@ import reducer from './node_modules/reducers'
 import App from './node_modules/App'
 // import registerServiceWorker from './registerServiceWorker'
 
+import './node_modules/config'
 
 // const browserHistory = createBrowserHistory({ basename: '/react/crypto_example' })
 const browserHistory = createBrowserHistory()
