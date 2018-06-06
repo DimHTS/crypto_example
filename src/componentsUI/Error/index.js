@@ -7,7 +7,7 @@ import { errors } from '../../constants/errors'
 
 const Error = ({ onClick }) => {
   return <Fragment>
-    {errors.reload_page} <button onClick={onClick}>Reloading</button>
+    {errors.loadingPage_and_reloadPage} <button onClick={onClick}>Reloading</button>
   </Fragment>
 }
 

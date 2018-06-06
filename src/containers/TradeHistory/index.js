@@ -23,12 +23,13 @@ class TradeHistory extends Component {
   }
 
   componentDidMount() {
-    this.onGetTiker();
+    this.handleStartContainer();
   }
 
-  onGetTiker = () => {
+  handleStartContainer = () => {
     this.props.onGetTiker();
   }
+
 
   handleSelectedCurrencie = (currencie) => {
     this.setState({ seletedCurrencie: currencie })
@@ -40,7 +41,7 @@ class TradeHistory extends Component {
 
   render() {
     if (this.props.loading_Tiker) return <Loading />
-    if (this.props.error_Tiker) { return <Error onClick={() => this.onGetTiker()} /> }
+    if (this.props.error_Tiker) { return <Error onClick={() => this.handleStartContainer()} /> }
 
     return (
       <div>

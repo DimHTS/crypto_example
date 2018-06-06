@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 //Components
 import Button from '../../componentsUI/Button'
+import { errors } from '../../constants/errors'
 
 // import './index.css';
 
@@ -12,7 +13,7 @@ class TradeHistory extends Component {
     const currencie = this.props.seletedCurrencie;
     const coin = this.props.seletedCoin;
     if ((currencie === '') || (coin === '')) {
-      alert('You need to choose a currency and a coin!')
+      alert(errors.choose_currency_and_coin)
     } else {
       this.props.onGetTradeHistory(currencie, coin)
     }

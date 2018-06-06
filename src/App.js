@@ -20,11 +20,11 @@ class App extends Component {
         <div className="container">
           <Switch>
             <Route exact path={baseUrl + '/'} component={TradeHistory} />
-            <Route path={baseUrl + '*'} component={NotFound} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </div>
-    );
+    )
   }
 }
 

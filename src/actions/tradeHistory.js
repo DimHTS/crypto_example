@@ -1,13 +1,10 @@
 import axios from 'axios'
 
-
-export const GET__TRADE_HISTORY__LOADING = 'GET__TRADE_HISTORY__LOADING'
-export const GET__TRADE_HISTORY__SUCCESS = 'GET__TRADE_HISTORY__SUCCESS'
-export const GET__TRADE_HISTORY__ERROR = 'GET__TRADE_HISTORY__ERROR'
+import * as types from '../constants/ActionTypes'
 
 
 export const onGetTradeHistory = (currencie, coin) => async dispatch => {
-  dispatch({ type: GET__TRADE_HISTORY__LOADING })
+  dispatch({ type: types.GET__TRADE_HISTORY__LOADING })
 
   try {
     const start = Number(new Date().getTime() / 1000 - (60 * 60 * 24));
@@ -18,12 +15,12 @@ export const onGetTradeHistory = (currencie, coin) => async dispatch => {
     const dataTradeHistory = await axios.get(url).catch(error => { throw error })
 
     dispatch({
-      type: GET__TRADE_HISTORY__SUCCESS,
+      type: types.GET__TRADE_HISTORY__SUCCESS,
       data: dataTradeHistory.data
     })
   } catch (error) {
     dispatch({
-      type: GET__TRADE_HISTORY__ERROR
+      type: types.GET__TRADE_HISTORY__ERROR
     })
   }
 }
