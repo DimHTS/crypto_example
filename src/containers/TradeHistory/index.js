@@ -3,14 +3,16 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 
-import './index.css';
 import { onGetTiker } from '../../actions/tiker'
 import { onGetTradeHistory } from '../../actions/tradeHistory'
 //Components
-import TikerSelection from '../../components/TikerSelection'
-import TradeHistoryComponent from '../../components/TradeHistory'
 import Loading from '../../componentsUI/Loading'
 import Error from '../../componentsUI/Error'
+import Button from '../../componentsUI/Button'
+
+import './index.css';
+import { errors } from '../../constants/errors'
+
 
 class TradeHistory extends Component {
   constructor() {
@@ -31,39 +33,115 @@ class TradeHistory extends Component {
   }
 
 
-  handleSelectedCurrencie = (currencie) => {
+  handleSelectedCurrencie = (e) => {
+    const currencie = e.currentTarget.value;
     this.setState({ seletedCurrencie: currencie })
   }
 
-  handleSelectedCoin = (coin) => {
+  handleSelectedCoin = (e) => {
+    const coin = e.currentTarget.value;
     this.setState({ seletedCoin: coin })
   }
 
+
+  onGetTradeHistory = () => {
+    const currencie = this.state.seletedCurrencie;
+    const coin = this.state.seletedCoin;
+    if ((currencie === '') || (coin === '')) {
+      alert(errors.choose_currency_and_coin)
+    } else {
+      this.props.onGetTradeHistory(currencie, coin)
+    }
+  }
+
   render() {
+    const { loading_TradeHistory, error_TradeHistory, tradeHistory } = this.props;
+
     if (this.props.loading_Tiker) return <Loading />
-    if (this.props.error_Tiker) { return <Error onClick={() => this.handleStartContainer()} /> }
+    if (this.props.error_Tiker) return <Error onClick={() => this.handleStartContainer()} />
 
     return (
       <div>
         <br />
-        <TikerSelection
-          seletedCurrencie={this.state.seletedCurrencie}
-          currencies={this.props.currencies}
-          handleSelectedCurrencie={(currencie) => this.handleSelectedCurrencie(currencie)}
-          handleSelectedCoin={(coin) => this.handleSelectedCoin(coin)}
-          onGetTiker={() => this.props.onGetTiker()} />
+        <div>
+          <label>Currencie: </label>
+          <select onChange={this.handleSelectedCurrencie}>
+            <option value=''>Select currency</option>
+            {
+              this.props.currencies.map((item, num) => {
+                return <option key={num} value={item.name}>{item.name}</option>
+              })
+            }
+          </select>
+
+          &emsp;
+
+          <label>Coin: </label>
+          <select onChange={this.handleSelectedCoin}>
+            <option value=''>Select coin</option>
+            {
+              this.props.currencies.filter(item =>
+                String(item.name) === String(this.state.seletedCurrencie)
+              ).map(currencie => {
+                return currencie.coins.map(coin => {
+                  return <option key={coin} value={coin}>{coin}</option>
+                })
+              })
+            }
+          </select>
+        </div>
+
+
 
         <br />
         =====================================
         <br /> <br />
 
-        <TradeHistoryComponent
-          seletedCurrencie={this.state.seletedCurrencie}
-          seletedCoin={this.state.seletedCoin}
-          loading_TradeHistory={this.props.loading_TradeHistory}
-          error_TradeHistory={this.props.error_TradeHistory}
-          tradeHistory={this.props.tradeHistory}
-          onGetTradeHistory={(currencie, coin) => this.props.onGetTradeHistory(currencie, coin)} />
+
+
+        <div>
+          <Button
+            loading={loading_TradeHistory}
+            text='Get trade history'
+            error={error_TradeHistory}
+            errorText='Error occurred try again!'
+            onClick={this.onGetTradeHistory} />
+
+          <br />
+
+          {tradeHistory.length ?
+            <div>
+              <table border="1">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    tradeHistory.map((item, num) => {
+                      return <tr key={num}>
+                        <td>{item.date}</td>
+                        <td>{item.type}</td>
+                        <td>{item.rate}</td>
+                        <td>{item.amount}</td>
+                        <td>{item.total}</td>
+                      </tr>
+                    })
+                  }
+                </tbody>
+              </table>
+              <br />
+              Count of trades: {tradeHistory.length}
+            </div>
+            :
+            null
+          }
+        </div>
 
         <br />
       </div>
