@@ -6,27 +6,16 @@ import PropTypes from 'prop-types'
 import { onGetTiker } from '../../actions/tiker'
 import { onGetTradeHistory } from '../../actions/tradeHistory'
 //Components
+import FormSelect from '../../components/TradeHistory/FormSelect'
+//ComponentsUI
 import Loading from '../../componentsUI/Loading'
 import Error from '../../componentsUI/Error'
-import Button from '../../componentsUI/Button'
-import Select from '../../componentsUI/Select'
 import Table from '../../componentsUI/Table'
 
 import './index.css';
-import { errors } from '../../constants/errors'
-import findCoins from '../../helpers/TradeHistory/findCoins'
-
 
 
 class TradeHistory extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      seletedCurrencie: 'ETH',
-      seletedCoin: 'GNO'
-    }
-  }
 
   componentDidMount() {
     this.handleStartContainer();
@@ -36,35 +25,11 @@ class TradeHistory extends Component {
     this.props.onGetTiker();
   }
 
-
-  handleSelectedCurrencie = (e) => {
-    this.setState({
-      seletedCurrencie: e.target.value,
-      seletedCoin: ''
-    })
-  }
-
-  handleSelectedCoin = (e) => {
-    this.setState({ seletedCoin: e.target.value })
-  }
-
-
-  onGetTradeHistory = (e) => {
-    e.preventDefault();
-    const currencie = this.state.seletedCurrencie;
-    const coin = this.state.seletedCoin;
-    if ((currencie === '') || (coin === '')) {
-      alert(errors.choose_currency_and_coin)
-    } else {
-      this.props.onGetTradeHistory(currencie, coin)
-    }
-  }
-
-
   render() {
     const {
       loading_Tiker,
       error_Tiker,
+      currencies,
       loading_TradeHistory,
       error_TradeHistory,
       tradeHistory
@@ -77,36 +42,15 @@ class TradeHistory extends Component {
     return (
       <div>
         <br />
-        <form>
-          <Select
-            label='Currencie:'
-            value={this.state.seletedCurrencie}
-            onChange={this.handleSelectedCurrencie}
-            optionDefault='Select currency'
-            options={this.props.currencies} />
-
-          &emsp;
-
-          <Select
-            label='Coin:'
-            value={this.state.seletedCoin}
-            onChange={this.handleSelectedCoin}
-            optionDefault='Select coin'
-            options={findCoins(this.props.currencies, this.state.seletedCurrencie)} />
-
-          <br />
-          =====================================
-          <br />
-
-          <div>
-            <Button
-              loading={loading_TradeHistory}
-              text='Get trade history'
-              error={error_TradeHistory}
-              errorText={errors.tryAgain}
-              onClick={this.onGetTradeHistory} />
-          </div>
-        </form>
+        <FormSelect
+          loading_Tiker={loading_Tiker}
+          error_Tiker={error_Tiker}
+          currencies={currencies}
+          loading_TradeHistory={loading_TradeHistory}
+          error_TradeHistory={error_TradeHistory}
+          tradeHistory={tradeHistory}
+          onGetTradeHistory={this.props.onGetTradeHistory}
+        />
 
         <br />
 
