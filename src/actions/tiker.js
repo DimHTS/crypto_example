@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import * as types from '../constants/ActionTypes'
-import findCurrenciesAndCoins from '../helpers/actions/findCurrenciesAndCoins'
+import findCurrenciesAndCoins from '../helpers/TradeHistory/findCurrenciesAndCoins'
 
 
 export const onGetTiker = () => async dispatch => {
