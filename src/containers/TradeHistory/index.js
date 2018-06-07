@@ -9,9 +9,13 @@ import { onGetTradeHistory } from '../../actions/tradeHistory'
 import Loading from '../../componentsUI/Loading'
 import Error from '../../componentsUI/Error'
 import Button from '../../componentsUI/Button'
+import Select from '../../componentsUI/Select'
+import Table from '../../componentsUI/Table'
 
 import './index.css';
 import { errors } from '../../constants/errors'
+import findCoins from '../../helpers/TradeHistory/findCoins'
+
 
 
 class TradeHistory extends Component {
@@ -19,8 +23,8 @@ class TradeHistory extends Component {
     super()
 
     this.state = {
-      seletedCurrencie: '',
-      seletedCoin: ''
+      seletedCurrencie: 'ETH',
+      seletedCoin: 'GNO'
     }
   }
 
@@ -34,17 +38,19 @@ class TradeHistory extends Component {
 
 
   handleSelectedCurrencie = (e) => {
-    const currencie = e.currentTarget.value;
-    this.setState({ seletedCurrencie: currencie })
+    this.setState({
+      seletedCurrencie: e.target.value,
+      seletedCoin: ''
+    })
   }
 
   handleSelectedCoin = (e) => {
-    const coin = e.currentTarget.value;
-    this.setState({ seletedCoin: coin })
+    this.setState({ seletedCoin: e.target.value })
   }
 
 
-  onGetTradeHistory = () => {
+  onGetTradeHistory = (e) => {
+    e.preventDefault();
     const currencie = this.state.seletedCurrencie;
     const coin = this.state.seletedCoin;
     if ((currencie === '') || (coin === '')) {
@@ -54,97 +60,68 @@ class TradeHistory extends Component {
     }
   }
 
-  render() {
-    const { loading_TradeHistory, error_TradeHistory, tradeHistory } = this.props;
 
-    if (this.props.loading_Tiker) return <Loading />
-    if (this.props.error_Tiker) return <Error onClick={() => this.handleStartContainer()} />
+  render() {
+    const {
+      loading_Tiker,
+      error_Tiker,
+      loading_TradeHistory,
+      error_TradeHistory,
+      tradeHistory
+    } = this.props;
+
+    if (loading_Tiker) return <Loading />
+    if (error_Tiker) return <Error onClick={() => this.handleStartContainer()} />
+
 
     return (
       <div>
         <br />
-        <div>
-          <label>Currencie: </label>
-          <select onChange={this.handleSelectedCurrencie}>
-            <option value=''>Select currency</option>
-            {
-              this.props.currencies.map((item, num) => {
-                return <option key={num} value={item.name}>{item.name}</option>
-              })
-            }
-          </select>
+        <form>
+          <Select
+            label='Currencie:'
+            value={this.state.seletedCurrencie}
+            onChange={this.handleSelectedCurrencie}
+            optionDefault='Select currency'
+            options={this.props.currencies} />
 
           &emsp;
 
-          <label>Coin: </label>
-          <select onChange={this.handleSelectedCoin}>
-            <option value=''>Select coin</option>
-            {
-              this.props.currencies.filter(item =>
-                String(item.name) === String(this.state.seletedCurrencie)
-              ).map(currencie => {
-                return currencie.coins.map(coin => {
-                  return <option key={coin} value={coin}>{coin}</option>
-                })
-              })
-            }
-          </select>
-        </div>
-
-
-
-        <br />
-        =====================================
-        <br /> <br />
-
-
-
-        <div>
-          <Button
-            loading={loading_TradeHistory}
-            text='Get trade history'
-            error={error_TradeHistory}
-            errorText='Error occurred try again!'
-            onClick={this.onGetTradeHistory} />
+          <Select
+            label='Coin:'
+            value={this.state.seletedCoin}
+            onChange={this.handleSelectedCoin}
+            optionDefault='Select coin'
+            options={findCoins(this.props.currencies, this.state.seletedCurrencie)} />
 
           <br />
+          =====================================
+          <br />
 
-          {tradeHistory.length ?
-            <div>
-              <table border="1">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Rate</th>
-                    <th>Amount</th>
-                    <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    tradeHistory.map((item, num) => {
-                      return <tr key={num}>
-                        <td>{item.date}</td>
-                        <td>{item.type}</td>
-                        <td>{item.rate}</td>
-                        <td>{item.amount}</td>
-                        <td>{item.total}</td>
-                      </tr>
-                    })
-                  }
-                </tbody>
-              </table>
-              <br />
-              Count of trades: {tradeHistory.length}
-            </div>
-            :
-            null
-          }
-        </div>
+          <div>
+            <Button
+              loading={loading_TradeHistory}
+              text='Get trade history'
+              error={error_TradeHistory}
+              errorText={errors.tryAgain}
+              onClick={this.onGetTradeHistory} />
+          </div>
+        </form>
 
         <br />
-      </div>
+
+        <Table
+          data={tradeHistory}
+          counterText='Count of trades:'
+          columns={[
+            { "Date": "date" },
+            { "Type": "type" },
+            { "Rate": "rate" },
+            { "Amount": "amount" },
+            { "Total": "total" }
+          ]}
+        />
+      </div >
     )
   }
 }
