@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 
-import { onGetTiker } from '../../actions/tiker'
-import { onGetTradeHistory } from '../../actions/tradeHistory'
+import { onGetTiker } from '../../actions/TradeHistory/tiker'
+import { onGetTradeHistory } from '../../actions/TradeHistory/tradeHistory'
 //Components
 import FormSelect from '../../components/TradeHistory/FormSelect'
 //ComponentsUI
@@ -83,13 +83,13 @@ TradeHistory.propTypes = {
 
 
 const mapStateToProps = (state) => ({
-  loading_Tiker: state.tiker.loading,
-  error_Tiker: state.tiker.error,
-  currencies: state.tiker.currencies,
+  loading_Tiker: state.TradeHistory.tiker.loading,
+  error_Tiker: state.TradeHistory.tiker.error,
+  currencies: state.TradeHistory.tiker.currencies,
 
-  loading_TradeHistory: state.tradeHistory.loading,
-  error_TradeHistory: state.tradeHistory.error,
-  tradeHistory: state.tradeHistory.data,
+  loading_TradeHistory: state.TradeHistory.tradeHistory.loading,
+  error_TradeHistory: state.TradeHistory.tradeHistory.error,
+  tradeHistory: state.TradeHistory.tradeHistory.data,
 })
 
 const mapDispatchToProps = ({

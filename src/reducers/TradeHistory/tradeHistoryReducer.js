@@ -1,4 +1,4 @@
-import * as types from '../constants/ActionTypes'
+import * as types from '../../constants/ActionTypes'
 
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 
-export default function tradeHistory(state = initialState, action) {
+export default function tradeHistoryReducer(state = initialState, action) {
   switch (action.type) {
     case types.GET__TRADE_HISTORY__LOADING:
       return {
