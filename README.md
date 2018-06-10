@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+https://dimhts.github.io/react/crypto_example/
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+## Задание
+Необходимо создать мини-проект с расчетом на дальнейшее масштабирование. Приложение должно обращаться по API к криптовалютной бирже, получать список всех сделок за день по каждой валютной паре и в зависимости от выбранной пары рендерить список на фронтенде.
+
+В качестве api взята биржа Полоникс - https://poloniex.com/support/api/ 
