@@ -12,14 +12,12 @@ import NotFound from './containers/NotFound';
 
 class App extends Component {
   render() {
-    const baseUrl = process.env.PUBLIC_URL;
-
     return (
       <div>
         {/* <Header /> */}
         <div className="container">
           <Switch>
-            <Route exact path={baseUrl + '/'} component={TradeHistory} />
+            <Route exact path={'/'} component={TradeHistory} />
             <Route component={NotFound} />
           </Switch>
         </div>
