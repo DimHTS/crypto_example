@@ -57,13 +57,13 @@ class TradeHistory extends Component {
         <Table
           data={tradeHistory}
           counterText='Count of trades:'
-          columns={[
-            { "Date": "date" },
-            { "Type": "type" },
-            { "Rate": "rate" },
-            { "Amount": "amount" },
-            { "Total": "total" }
-          ]}
+          columns={{
+            "Date": "date",
+            "Type": "type",
+            "Rate": "rate",
+            "Amount": "amount",
+            "Total": "total"
+          }}
         />
       </div >
     )

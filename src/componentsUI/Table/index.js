@@ -2,19 +2,18 @@
   <Table
     data={tradeHistory}
     counterText='Count of trades:'
-    columns={[
-      { "Date": "date" },
-      { "Type": "type" },
-      { "Rate": "rate" },
-      { "Amount": "amount" },
-      { "Total": "total" }
-    ]}
+    columns={{
+      "Header": "keyName_dataProperty",
+      "Date": "date",
+      "Type": "type"
+    }}
   />
 
-  "Date" - is the column header (table=>thead=>tr=>th)
-  "date" - is the data key (table=>tbody=>tr=>td)
+  "Header" - is the column header (table=>thead=>tr=>th)
+  "keyName_dataProperty" - string-based value accessors! (table=>tbody=>tr=>td)
 */
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 
 const Table = ({ data, columns, counterText }) => {
@@ -23,13 +22,13 @@ const Table = ({ data, columns, counterText }) => {
 
 
   let tableKeys = [];
-  columns.map(item => tableKeys.push(item[Object.keys(item)])); // create tableKeys
+  Object.keys(columns).map(item => tableKeys.push(columns[item]));
 
   return <Fragment>
     <table border="1">
       <thead>
         <tr>
-          {columns.map((item, num) => <th key={num}>{Object.keys(item)}</th>)}
+          {Object.keys(columns).map((item, num) => <th key={num}>{item}</th>)}
         </tr>
       </thead>
       <tbody>
@@ -47,5 +46,10 @@ const Table = ({ data, columns, counterText }) => {
   </Fragment>
 }
 
+Table.propTypes = {
+  data: PropTypes.array.isRequired,
+  counterText: PropTypes.string.isRequired,
+  columns: PropTypes.objectOf(PropTypes.any)
+}
 
 export default Table;
