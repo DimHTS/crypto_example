@@ -12,7 +12,7 @@ import Loading from '../../componentsUI/Loading'
 import Error from '../../componentsUI/Error'
 import Table from '../../componentsUI/Table'
 
-import './index.css';
+import './index.css'
 
 
 class TradeHistory extends Component {
@@ -37,7 +37,6 @@ class TradeHistory extends Component {
 
     if (loading_Tiker) return <Loading />
     if (error_Tiker) return <Error onClick={() => this.handleStartContainer()} />
-
 
     return (
       <div>

@@ -7,8 +7,8 @@ import thunk from 'redux-thunk'
 import reducer from '../reducers'
 
 
-// const browserHistory = createBrowserHistory({ basename: '/react/crypto_example' })
-const browserHistory = createBrowserHistory()
+const browserHistory = createBrowserHistory({ basename: '/react/crypto_example' })
+// const browserHistory = createBrowserHistory()
 const middleware = applyMiddleware(thunk, routerMiddleware(browserHistory))
 
 export const store = createStore(reducer, composeWithDevTools(middleware))

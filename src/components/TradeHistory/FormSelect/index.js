@@ -14,8 +14,8 @@ class FormSelect extends Component {
     super()
 
     this.state = {
-      seletedCurrencie: 'ETH',
-      seletedCoin: 'GNO'
+      seletedCurrencie: '',
+      seletedCoin: ''
     }
   }
 
