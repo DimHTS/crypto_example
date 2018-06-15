@@ -11,40 +11,49 @@ describe('reducers > TradeHistory => tiker', () => {
   }
 
   it('initial state', () => {
-    expect(tiker(undefined, {})).toEqual(initialState)
+    const action = tiker(undefined, {})
+    expect(action).toEqual(initialState)
   })
 
   it('loading', () => {
-    expect(
-      tiker(initialState, { type: types.GET__TIKER__LOADING })
-    ).toEqual({
+    const action = tiker(initialState, { type: types.GET__TIKER__LOADING })
+    const value = {
       loading: true,
       error: false,
       currencies: []
-    })
+    }
+
+    expect(action).toEqual(value)
   })
+
 
   it('success', () => {
-    expect(
-      tiker(initialState, {
+    const action = tiker(
+      initialState,
+      {
         type: types.GET__TIKER__SUCCESS,
-        currencies: ['test1', 'test2']
-      })
-    ).toEqual({
+        currencies: []
+      }
+    )
+    const value = {
       loading: false,
       error: false,
-      currencies: ['test1', 'test2']
-    })
+      currencies: []
+    }
+
+    expect(action).toEqual(value)
   })
 
+
   it('error', () => {
-    expect(
-      tiker(initialState, { type: types.GET__TIKER__ERROR })
-    ).toEqual({
+    const action = tiker(initialState, { type: types.GET__TIKER__ERROR })
+    const value = {
       loading: false,
       error: true,
       currencies: []
-    })
+    }
+
+    expect(action).toEqual(value)
   })
 
 })
