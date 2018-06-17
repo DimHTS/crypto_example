@@ -1,56 +1,47 @@
-import tradeHistoryReducer from '../tradeHistoryReducer'
+import { default as reducer, initialState } from '../tradeHistoryReducer'
 import * as types from '../../../constants/ActionTypes'
 
 describe('reducers > TradeHistory => tradeHistoryReducer', () => {
 
-  const initialState = {
-    loading: false,
-    error: false,
-    data: []
-  }
-
   it('initial state', () => {
-    const action = tradeHistoryReducer(undefined, {})
-    expect(action).toEqual(initialState)
+    expect(reducer(undefined, {})).toEqual(initialState)
   })
 
   it('loading', () => {
-    const action = tradeHistoryReducer(initialState, { type: types.GET__TRADE_HISTORY__LOADING })
+    const action = {
+      type: types.GET__TRADE_HISTORY__LOADING
+    }
     const value = {
-      loading: true,
-      error: false,
-      data: []
+      ...initialState,
+      loading: true
     }
 
-    expect(action).toEqual(value)
+    expect(reducer(initialState, action)).toEqual(value)
   })
 
   it('success', () => {
-    const action = tradeHistoryReducer(
-      initialState,
-      {
-        type: types.GET__TRADE_HISTORY__SUCCESS,
-        data: []
-      }
-    )
+    const action = {
+      type: types.GET__TRADE_HISTORY__SUCCESS,
+      payload: [{ test: "test" }]
+    }
     const value = {
-      loading: false,
-      error: false,
-      data: []
+      ...initialState,
+      data: [{ test: "test" }]
     }
 
-    expect(action).toEqual(value)
+    expect(reducer(initialState, action)).toEqual(value)
   })
 
   it('error', () => {
-    const action = tradeHistoryReducer(initialState, { type: types.GET__TRADE_HISTORY__ERROR })
+    const action = {
+      type: types.GET__TRADE_HISTORY__ERROR
+    }
     const value = {
-      loading: false,
-      error: true,
-      data: []
+      ...initialState,
+      error: true
     }
 
-    expect(action).toEqual(value)
+    expect(reducer(initialState, action)).toEqual(value)
   })
 
 })

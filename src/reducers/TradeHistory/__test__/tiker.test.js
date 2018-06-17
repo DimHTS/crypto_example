@@ -1,59 +1,50 @@
-import tiker from '../tiker'
+import { default as reducer, initialState } from '../tiker'
 import * as types from '../../../constants/ActionTypes'
 
 
 describe('reducers > TradeHistory => tiker', () => {
 
-  const initialState = {
-    loading: false,
-    error: false,
-    currencies: []
-  }
-
   it('initial state', () => {
-    const action = tiker(undefined, {})
-    expect(action).toEqual(initialState)
+    expect(reducer(undefined, {})).toEqual(initialState)
   })
 
   it('loading', () => {
-    const action = tiker(initialState, { type: types.GET__TIKER__LOADING })
+    const action = {
+      type: types.GET__TIKER__LOADING
+    }
     const value = {
+      ...initialState,
       loading: true,
-      error: false,
-      currencies: []
     }
 
-    expect(action).toEqual(value)
+    expect(reducer(initialState, action)).toEqual(value)
   })
 
 
   it('success', () => {
-    const action = tiker(
-      initialState,
-      {
-        type: types.GET__TIKER__SUCCESS,
-        currencies: []
-      }
-    )
+    const action = {
+      type: types.GET__TIKER__SUCCESS,
+      payload: [{ test: "test" }]
+    }
     const value = {
-      loading: false,
-      error: false,
-      currencies: []
+      ...initialState,
+      currencies: [{ test: "test" }]
     }
 
-    expect(action).toEqual(value)
+    expect(reducer(initialState, action)).toEqual(value)
   })
 
 
   it('error', () => {
-    const action = tiker(initialState, { type: types.GET__TIKER__ERROR })
+    const action = {
+      type: types.GET__TIKER__ERROR
+    }
     const value = {
-      loading: false,
-      error: true,
-      currencies: []
+      ...initialState,
+      error: true
     }
 
-    expect(action).toEqual(value)
+    expect(reducer(initialState, action)).toEqual(value)
   })
 
 })
