@@ -26,7 +26,7 @@ const Button = ({ loading, text, error, errorText, onClick }) => {
     return <Fragment>
       <button onClick={onClick}>{text}</button>
       &nbsp;
-      {errorText}
+      <span>{errorText}</span>
     </Fragment>
   }
 
