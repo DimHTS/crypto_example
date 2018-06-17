@@ -1,7 +1,7 @@
-import * as types from '../../constants/ActionTypes'
+import * as t from '../../constants/ActionTypes'
 
 
-const initialState = {
+export const initialState = {
   loading: false,
   error: false,
   currencies: []
@@ -10,24 +10,21 @@ const initialState = {
 
 export default function tiker(state = initialState, action) {
   switch (action.type) {
-    case types.GET__TIKER__LOADING:
+    case t.GET__TIKER__LOADING:
       return {
-        ...state,
-        loading: true,
-        error: false
+        ...initialState,
+        loading: true
       };
 
-    case types.GET__TIKER__SUCCESS:
+    case t.GET__TIKER__SUCCESS:
       return {
-        loading: false,
-        error: false,
-        currencies: action.currencies
+        ...initialState,
+        currencies: action.payload
       };
 
-    case types.GET__TIKER__ERROR:
+    case t.GET__TIKER__ERROR:
       return {
-        ...state,
-        loading: false,
+        ...initialState,
         error: true
       };
 

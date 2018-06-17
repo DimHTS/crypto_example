@@ -1,7 +1,7 @@
-import * as types from '../../constants/ActionTypes'
+import * as t from '../../constants/ActionTypes'
 
 
-const initialState = {
+export const initialState = {
   loading: false,
   error: false,
   data: []
@@ -10,25 +10,22 @@ const initialState = {
 
 export default function tradeHistoryReducer(state = initialState, action) {
   switch (action.type) {
-    case types.GET__TRADE_HISTORY__LOADING:
+    case t.GET__TRADE_HISTORY__LOADING:
       return {
-        loading: true,
-        error: false,
-        data: []
+        ...initialState,
+        loading: true
       };
 
-    case types.GET__TRADE_HISTORY__SUCCESS:
+    case t.GET__TRADE_HISTORY__SUCCESS:
       return {
-        loading: false,
-        error: false,
-        data: action.data
+        ...initialState,
+        data: action.payload
       };
 
-    case types.GET__TRADE_HISTORY__ERROR:
+    case t.GET__TRADE_HISTORY__ERROR:
       return {
-        loading: false,
-        error: true,
-        data: []
+        ...initialState,
+        error: true
       };
 
     default:

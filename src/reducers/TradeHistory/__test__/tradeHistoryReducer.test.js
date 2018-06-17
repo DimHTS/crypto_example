@@ -1,5 +1,5 @@
 import { default as reducer, initialState } from '../tradeHistoryReducer'
-import * as types from '../../../constants/ActionTypes'
+import * as t from '../../../constants/ActionTypes'
 
 describe('reducers > TradeHistory => tradeHistoryReducer', () => {
 
@@ -9,7 +9,7 @@ describe('reducers > TradeHistory => tradeHistoryReducer', () => {
 
   it('loading', () => {
     const action = {
-      type: types.GET__TRADE_HISTORY__LOADING
+      type: t.GET__TRADE_HISTORY__LOADING
     }
     const value = {
       ...initialState,
@@ -21,7 +21,7 @@ describe('reducers > TradeHistory => tradeHistoryReducer', () => {
 
   it('success', () => {
     const action = {
-      type: types.GET__TRADE_HISTORY__SUCCESS,
+      type: t.GET__TRADE_HISTORY__SUCCESS,
       payload: [{ test: "test" }]
     }
     const value = {
@@ -34,7 +34,7 @@ describe('reducers > TradeHistory => tradeHistoryReducer', () => {
 
   it('error', () => {
     const action = {
-      type: types.GET__TRADE_HISTORY__ERROR
+      type: t.GET__TRADE_HISTORY__ERROR
     }
     const value = {
       ...initialState,

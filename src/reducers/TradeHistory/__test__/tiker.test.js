@@ -1,5 +1,5 @@
 import { default as reducer, initialState } from '../tiker'
-import * as types from '../../../constants/ActionTypes'
+import * as t from '../../../constants/ActionTypes'
 
 
 describe('reducers > TradeHistory => tiker', () => {
@@ -10,7 +10,7 @@ describe('reducers > TradeHistory => tiker', () => {
 
   it('loading', () => {
     const action = {
-      type: types.GET__TIKER__LOADING
+      type: t.GET__TIKER__LOADING
     }
     const value = {
       ...initialState,
@@ -23,7 +23,7 @@ describe('reducers > TradeHistory => tiker', () => {
 
   it('success', () => {
     const action = {
-      type: types.GET__TIKER__SUCCESS,
+      type: t.GET__TIKER__SUCCESS,
       payload: [{ test: "test" }]
     }
     const value = {
@@ -37,7 +37,7 @@ describe('reducers > TradeHistory => tiker', () => {
 
   it('error', () => {
     const action = {
-      type: types.GET__TIKER__ERROR
+      type: t.GET__TIKER__ERROR
     }
     const value = {
       ...initialState,
