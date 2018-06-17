@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import * as types from '../../constants/ActionTypes'
 import findCurrenciesAndCoins from '../../helpers/TradeHistory/findCurrenciesAndCoins'
+import throwDataError from '../../helpers/TradeHistory/throwDataError'
 
 
 export const onGetTiker = () => async dispatch => {
@@ -9,10 +10,11 @@ export const onGetTiker = () => async dispatch => {
 
   try {
     const tiker = await axios.get('/public?command=returnTicker').catch(error => { throw error })
+    throwDataError(tiker)
 
     dispatch({
       type: types.GET__TIKER__SUCCESS,
-      currencies: findCurrenciesAndCoins(tiker.data)
+      payload: findCurrenciesAndCoins(tiker.data)
     })
   } catch (error) {
     dispatch({
